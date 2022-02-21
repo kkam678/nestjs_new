@@ -1,0 +1,25 @@
+version: '3'
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nestjs
+    links:
+      - database:3306
+    ports:
+      - "3100:3000"
+    restart: unless-stopped
+    volumes:
+      - .:/app
+      - /app/node_modules
+  database:
+    image: mariadb
+    container_name: nestjs_db
+    ports:
+      - "3306:3306"
+    environment:
+      TZ: Asia/Seoul
+      MARIADB_ROOT_PASSWORD: test
+      MARIADB_DATABASE: test
+    restart: always
