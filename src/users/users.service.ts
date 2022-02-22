@@ -1,14 +1,14 @@
 import * as uuid from 'uuid';
 import {Injectable, NotFoundException, UnprocessableEntityException} from '@nestjs/common';
-import {CreateUserDto} from './dto/create-user.dto';
-import {UpdateUserDto} from './dto/update-user.dto';
+import {CreateUserDto} from './interface/dto/create-user.dto';
+// import {UpdateUserDto} from './interface/dto/update-user.dto';
 import {EmailService} from "../email/email.service";
 import {InjectRepository} from "@nestjs/typeorm";
-import {UserEntity} from "./entities/user.entity";
+import {UserEntity} from "./infra/db/entities/user.entity";
 import {Connection, Repository} from "typeorm";
 import {ulid} from "ulid";
 import {AuthService} from "../auth/auth.service";
-import {UserInfo} from "./UserInfo";
+import {UserInfo} from "./interface/UserInfo";
 
 
 @Injectable()
@@ -23,14 +23,14 @@ export class UsersService {
     }
 
     async create(name: string, email: string, password: string) {
-        const userExist = await this.checkUserExists(email);
-        if (userExist) {
-            throw new UnprocessableEntityException('해당 이메일로는 가입할 수 없습니다.');
-        }
-        const signupVerifyToken = uuid.v1();
-
-        await this.saveUser(name, email, password, signupVerifyToken);
-        await this.sendMemberJoinEmail(email, signupVerifyToken);
+        // const userExist = await this.checkUserExists(email);
+        // if (userExist) {
+        //     throw new UnprocessableEntityException('해당 이메일로는 가입할 수 없습니다.');
+        // }
+        // const signupVerifyToken = uuid.v1();
+        //
+        // await this.saveUser(name, email, password, signupVerifyToken);
+        // await this.sendMemberJoinEmail(email, signupVerifyToken);
 
     }
 
@@ -77,21 +77,21 @@ export class UsersService {
 
     }
 
-    private async checkUserExists(email: string) {
-        const user = await this.usersRepository.findOne({email: email});
-
-        return user !== undefined;
-    }
-
-    private async saveUser(name: string, email: string, password: string, signupVerifyToken: string) {
-        const user = new UserEntity();
-        user.id = ulid();
-        user.name = name;
-        user.email = email;
-        user.password = password;
-        user.signupVerifyToken = signupVerifyToken;
-        await this.usersRepository.save(user);
-    }
+    // private async checkUserExists(email: string) {
+    //     const user = await this.usersRepository.findOne({email: email});
+    //
+    //     return user !== undefined;
+    // }
+    //
+    // private async saveUser(name: string, email: string, password: string, signupVerifyToken: string) {
+    //     const user = new UserEntity();
+    //     user.id = ulid();
+    //     user.name = name;
+    //     user.email = email;
+    //     user.password = password;
+    //     user.signupVerifyToken = signupVerifyToken;
+    //     await this.usersRepository.save(user);
+    // }
 
     private async saveUserUsingQueryRunner(name: string, email: string, password: string, signupVerifyToken: string) {
         const queryRunner = this.connection.createQueryRunner();

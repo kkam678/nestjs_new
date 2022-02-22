@@ -9,9 +9,9 @@ import {validationSchema} from "./config/validation-schema";
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {LoggerMiddleware} from "./logger/logger.middelware";
 import {Logger2Middleware} from "./logger/logger2.middelware";
-import {UsersController} from "./users/users.controller";
+import {UsersController} from "./users/interface/users.controller";
 import {APP_GUARD} from "@nestjs/core";
-import {AuthGuard} from "./guard/AuthGuard";
+import {AuthGuard} from "./guard/auth.guard";
 import {AuthModule} from './auth/auth.module';
 import authConfig from "./config/auth-config";
 import {LoggerModule} from "./logger/logger.module";
@@ -22,6 +22,7 @@ import {
 import * as winston from 'winston';
 import {ExceptionModule} from "./exception/exception.module";
 import {LoggingModule} from "./logging/logging.module";
+import {CreateUserHandler} from "./users/application/command/create-user.handler";
 
 @Module({
     controllers: [AppController],

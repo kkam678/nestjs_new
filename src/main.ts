@@ -4,7 +4,7 @@ import * as dotenv from 'dotenv';
 import * as path from 'path';
 import {ValidationPipe} from "@nestjs/common";
 import {logger3} from "./logger/logger3.middelware";
-import {AuthGuard} from "./guard/AuthGuard";
+import {AuthGuard} from "./guard/auth.guard";
 import {MyLogger} from "./logger/MyLogger";
 import {WINSTON_MODULE_PROVIDER} from "nest-winston";
 import {utilities as nestWinstonModuleUtilities, WinstonModule} from 'nest-winston';
@@ -35,7 +35,7 @@ async function bootstrap() {
         })
     });
     // app.useGlobalGuards(new AuthGuard());
-    // app.useLogger(app.get(MyLogger));
+    app.useLogger(app.get(MyLogger));
     // app.useLogger(app.get(WINSTON_MODULE_PROVIDER));
     app.useGlobalInterceptors(
         // new LoggingInterceptor(),
