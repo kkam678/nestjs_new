@@ -23,6 +23,8 @@ import * as winston from 'winston';
 import {ExceptionModule} from "./exception/exception.module";
 import {LoggingModule} from "./logging/logging.module";
 import {CreateUserHandler} from "./users/application/command/create-user.handler";
+import {InstagramService} from "./instagram/instagram.service";
+import {InstagramModule} from "./instagram/instagram.module";
 
 @Module({
     controllers: [AppController],
@@ -59,6 +61,7 @@ import {CreateUserHandler} from "./users/application/command/create-user.handler
         }),
         ExceptionModule,
         LoggingModule,
+        InstagramModule,
     ],
 })
 

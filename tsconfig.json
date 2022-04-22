@@ -17,5 +17,6 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false
-  }
+  },
+  "include": ["src", "node_modules/@types/puppeteer/index.d.ts"]
 }

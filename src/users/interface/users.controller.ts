@@ -44,7 +44,7 @@ export class UsersController {
     }
 
     @Post()
-     async createUser(@Body() dto: CreateUserDto): Promise<void> {
+    async createUser(@Body() dto: CreateUserDto): Promise<void> {
         const {name, email, password} = dto;
         const command = new CreateUserCommand(name, email, password);
         return this.commandBus.execute(command);
@@ -60,7 +60,7 @@ export class UsersController {
     @Post('/login')
     async login(@Body() dto: UserLoginDto): Promise<string> {
         const {email, password} = dto;
-        const command = new LoginCommand(email,password);
+        const command = new LoginCommand(email, password);
         return this.commandBus.execute(command);
     }
 
