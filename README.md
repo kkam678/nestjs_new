@@ -24,7 +24,8 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.<br/><br/>
+[Poppeteer 설치 필수 의존성] sudo yum install atk java-atk-wrapper at-spi2-atk gtk3 libXt libdrm mesa-libgbm
 
 ## Installation
 

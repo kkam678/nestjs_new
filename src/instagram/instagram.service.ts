@@ -27,7 +27,8 @@ export class InstagramService {
         // console.log(result);
         const browser = await puppeteer.launch({
             // headless: false,
-            // args: ["--window-size=1920,1080"],
+            args: ["--window-size=1920,1080", "--no-sandbox"],
+
             // userDataDir: "C:\\Users\\ms\\AppData\\Local\\Google\\Chrome\\User Data",
         })
         const page = await browser.newPage()
